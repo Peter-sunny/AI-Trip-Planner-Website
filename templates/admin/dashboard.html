@@ -1,0 +1,267 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<title>Admin</title>
+<body>
+<main>
+
+    <style type="text/css">
+        .sidebar-menu .active {
+    background-color: red; /* Set the background color to red */
+    color: white; /* Set the text color to white or any other color you prefer */
+}
+    </style>
+
+
+
+
+<div class="col-lg-6" style="margin-top: 0px; margin-left: 200px;">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn btn-primary main_theme space" data-bs-toggle="modal" data-bs-target="#exampleModal" style="font-weight: 900" id="adminAddPlus">+</button>
+
+<button type="button" class="btn btn-primary btn btn-primary main_theme space" data-bs-toggle="modal" data-bs-target="#passwordModal" style="font-weight: 900" id="adminAddPluxss">Change Password</button>
+
+<button class="btn btn-primary btn btn-primary main_theme space" id="adminAddText">ADD ADMIN</button>
+
+<!-- <button class="btn btn-primary btn btn-primary main_theme space" id="adminAddText">Change Password</button> -->
+
+{% if password_status_message %}
+<div class="modal fade" id="password_status_message" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel" style="color: green;">Status</h5>
+                <button type="button" class="" data-dismiss="modal" aria-label="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ password_status_message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+
+<!-- admin adding status Modal -->
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel" style="color: green;">Status</h5>
+                <button type="button" class="" data-dismiss="modal" aria-label="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ add_status_message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- admin deleting status Modal -->
+<div class="modal fade" id="dltErrorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel" style="color: red;">Status</h5>
+                <button type="button" class="" data-dismiss="modal" aria-label="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ dlt_status_message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Modal add admins form  -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Admin</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="{{ url_for('add_admin')}}" method="POST" id="admin_Add_Form" onsubmit="return validateAdminAddForm()">
+            <span id="nameError" class="error"></span> <!-- Error message container -->
+            <input type="text" placeholder="Admin Name" name="admin_name" value="" class="form-control space" required>
+
+            <!-- <label>min 6 characters</label> -->
+            <span id="passwordError" class="error"></span> <!-- Error message container -->
+            <input type="password" name="admin_password" placeholder="Password" value="" class="form-control space" required>
+
+            <input type="text" name="type" value="admin" class="form-control space" readonly>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary main_theme">Save</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal change passwords form  -->
+<div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form action="{{ url_for('changepassword_admin')}}" method="POST" id="admin_changepassword_Form" >
+            <span id="nameErrorp" class="error" style="color: red"></span>
+            <input type="text" placeholder="Current Password" name="current_password" value="" class="form-control space" id="current_password">
+            <input type="text" placeholder="New Password" name="newPassword" value="" class="form-control space" id="newPassword">
+            <input type="text" placeholder="Confirm Password" name="confirmpassword" value="" class="form-control space" id="confirmpassword">
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary main_theme">Save</button>
+            </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <div>
+
+
+
+
+
+
+
+
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th scope="col">S ({{ admins|length }})</th>
+              <th scope="col">admin</th>
+              <th scope="col">More</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tbody>
+{% for row in admins %}
+    <tr>
+        <th scope="row">{{ loop.index }}</th>
+        <td>{{ row[1] }}</td>
+        <!-- Add unique IDs for the Remove link and its associated close button -->
+        <td>
+            <a style="color: blue; text-transform: capitalize;" id="deleteConfirmation_{{ row[0] }}" onclick="toggleCloseButton({{ row[0] }})" class="deleteConfirmation_">Remove</a>
+            <a style="color: blue; text-transform: capitalize; display: none" id="deleteConfirmationtic_{{ row[0] }}" class="adminRemoveConfirmation" href="{{ url_for('delete_admin', aid=row[0]) }}">
+                <i class="fa-solid fa-circle-check" style="color: #009894; font-size: 20px;"></i>
+            </a>
+            <a style="color: blue; text-transform: capitalize; display: none; padding-left: 30px" id="deleteConfirmationclose_{{ row[0] }}" class="adminRemoveConfirmation" href="#">
+                <i class="fa-solid fa-x" style="color: #000000; font-size: 15px;"></i>
+            </a>
+        </td>
+    </tr>
+{% endfor %}
+
+
+
+      </tbody>
+    </tbody>
+  </table>
+
+    </div>
+</div>
+</div>
+
+
+</main>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        {% if password_status_message %}
+            $('#password_status_message').modal('show');
+            $('#passwordModal')[0].reset();
+        {% endif %}
+        {% if add_status_message %}
+            $('#statusModal').modal('show');
+            $('#admin_Add_Form')[0].reset();
+        {% endif %}
+        {% if dlt_status_message %}
+            $('#dltErrorModal').modal('show');
+            $('#admin_Add_Form')[0].reset();
+        {% endif %}
+    });
+
+    $(document).ready(function() {
+        $(".adminRemoveConfirmation").click(function() {
+            $(".adminRemoveConfirmation").hide()
+            $(".deleteConfirmation_").show()
+        })
+
+        $("#adminAddPlus").hover(function() {
+            $("#adminAddText").show()
+        })
+         $("#adminAddPlus").mouseleave(function() {
+            $("#adminAddText").hide()
+        })
+    })
+</script>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    $('#admin_changepassword_Form').submit(function() {
+        var currentPassword = $("#current_password").val();
+        var newPassword = $("#newPassword").val();
+        var confirmPassword = $("#confirmpassword").val();
+        var hasNumber = /\d/.test(newPassword); // Regular expression to check if the new password contains any number
+
+        // Reset errors
+        $('#nameErrorp').text('');
+
+        // Check if all fields are filled
+        if (currentPassword === '' || newPassword === '' || confirmPassword === '') {
+            $('#nameErrorp').text('Please fill in all fields.');
+            return false;
+        }
+
+        // Check if passwords match
+        if (newPassword !== confirmPassword) {
+            $('#nameErrorp').text('New password and confirm password must match.');
+            return false;
+        }
+
+        // Check password length
+        if (newPassword.length < 6) {
+            $('#nameErrorp').text('Password must be at least 6 characters long.');
+            return false;
+        }
+
+        // Check if the new password contains any number
+        if (!hasNumber) {
+            $('#nameErrorp').text('Password must include at least one number.');
+            return false;
+        }
+
+        // If all conditions pass, the form will be submitted
+        return true;
+    });
+});
+
+</script>
+{% endblock %}

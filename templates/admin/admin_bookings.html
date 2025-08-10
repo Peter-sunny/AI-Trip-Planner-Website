@@ -1,0 +1,118 @@
+{% extends 'admin_base.html' %}
+{% block content %}
+<div class="col-lg-10" style="margin-top: 0px; margin-left: 200px;">
+<!-- Button trigger modal -->
+
+
+<!-- admin adding status Modal -->
+<div class="modal fade" id="statusModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel" style="color: green;">Status</h5>
+                <button type="button" class="" data-dismiss="modal" aria-label="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ add_status_message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- admin deleting status Modal -->
+<div class="modal fade" id="dltErrorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel" style="color: red;">Status</h5>
+                <button type="button" class="" data-dismiss="modal" aria-label="">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>{{ dlt_status_message }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <div>
+        <br><br><br>
+    <form action="{{ url_for('search_admin_bookings') }}" method="POST">
+        <input type="text" name="search_value" placeholder="search Bookings, IDs">
+        <input type="submit" name="">
+    </form>
+      <table  class="table table-striped" style="font-family: system-ui;">
+  <thead>
+    <tr>
+      <th scope="col">S({{ bookings|length }})</th>  
+      <th scope="col">Booking ID</th>
+      <th scope="col">user ID</th>
+      <th scope="col">Package ID</th>
+      <th scope="col">Provider ID</th>
+      <th scope="col">Status</th>
+      <th scope="col">Details</th>
+    </tr>
+  </thead>
+
+
+    <tbody>
+{% for row in bookings %}
+<tr>
+  <th scope="row">{{ loop.index }}</th>
+  <td>{{ row[0] }}</td>
+  <td>{{ row[11] }}</td>
+  <td>{{ row[12] }}</td>
+  <td>{{ row[13] }}</td>
+  <td>
+    {% if row[5] == 0 %}
+        Rejected
+    {% elif row[5] == 1%}
+        Accepted
+    {% else %}
+        Pending
+    {% endif %}
+  </td>
+  <td><a href="{{ url_for('admin_booking_details', booking_id=row[0], package_id=row[2]) }}" style="color: blue;">view details</a></td>
+</tr>
+  {% endfor %}
+  </tbody>
+
+</table>
+    </div>
+</div>
+
+<!-- Fact validating  -->
+<script>
+$(document).ready(function() {
+     {% if add_status_message %}
+        $('#statusModal').modal('show');
+        $('#fact_Add_Form')[0].reset();
+    {% endif %}
+    {% if dlt_status_message %}
+        $('#dltErrorModal').modal('show');
+        $('#fact_Add_Form')[0].reset();
+    {% endif %}
+
+        $(document).ready(function() {
+        $(".adminRemoveConfirmation").click(function() {
+            $(".adminRemoveConfirmation").hide()
+            $(".deleteConfirmation_").show()
+        })
+
+    });
+   
+});
+$(document).ready(function() {
+     $(".RemoveConfirmation").click(function() {
+            $(".RemoveConfirmation").hide()
+            $(".deleteConfirmation_").show()
+        })
+})
+</script>
+{% endblock %}
