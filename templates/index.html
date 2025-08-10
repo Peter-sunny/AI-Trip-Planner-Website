@@ -1,0 +1,928 @@
+{% extends 'base.html' %}
+{% block content %}
+<style type="text/css">
+  /*///////////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////////*/
+
+/* /////////////////////////////
+
+  1. Basic Styles
+  2. Navbar
+  3. Buttons
+  4. Hero
+  5. Marketing
+  6. Testimonials
+  7. Pricing
+  8. Call to Action
+  9. Footer
+  10. Media Queries
+
+   //////////////////////////*/
+
+
+/* ==============================================
+   2. Navbar 
+===============================================*/
+body{
+ background: radial-gradient(#039797, transparent);
+}
+#t-form-btn {
+   color: rgb(18 156 160)
+}
+
+#p-form-btn {
+  color: white;
+}
+.p-form {
+    display: none;
+ }
+
+ .bgholder {
+  background-image: url('{{ url_for("static", filename="/images/backgrounds/0d8.png") }}') !important;
+ }
+
+ #main-search {
+  background-image: url('{{ url_for("static", filename="/images/backgrounds/bg4.jpeg") }}');
+ }
+
+ .search-result {
+  display: none;
+ }
+
+.custom-navbar {
+  background-color: #ffffff!important;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,.09);
+  height: 70px;
+  max-height: 70px;
+}
+
+.navbar-toggler {
+  font-size: 38px;
+  background-color: transparent;
+}
+
+.navbar-toggler:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  color: #ffffff;
+}
+
+.navbar-collapse {
+  background-color: #ffffff;
+}
+
+.nav-custom-link {
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: .05em;
+  margin-top: 5px;
+}
+
+.navbar a {
+  color: #53627C !important;
+}
+
+.nav-right {
+  float: right;
+}
+
+/* ==============================================
+   3. Buttons
+===============================================*/
+
+.btn1 {
+  font-size: 14px;
+  font-weight: 400;
+  border-radius: 3px!important;
+  box-shadow: 0 2px 3px 0 rgba(0,0,0,.05), 0 1px 2px 0 rgba(0,0,0,.08);
+}
+
+.btn1:hover {
+  text-decoration: none;
+}
+
+.btn-regular1 {
+  background-color: #0095f7;
+  color: #ffffff;
+  padding: 10px 25px;
+  width: fit-content;
+  letter-spacing: .1em;
+  margin-top: 25px;
+  display: inline-block;
+}
+
+.btn-regular1:hover {
+  background-color: #0191f0;
+  color: #ffffff;
+}
+
+
+/* ==============================================
+   4. Hero
+===============================================*/
+.align-hero{
+      display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+}
+#hero {
+  
+}
+
+#hero h1 {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+#hero p {
+font-size: 16px;
+    font-weight: 300;
+    /* color: blue; */
+    margin-bottom: 0px;
+    padding: 0px;
+}
+
+#hero span {
+  font-weight: 700;
+    color: #0095f7;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+}
+
+
+
+}
+
+/* ==============================================
+   9. Media Queries
+===============================================*/
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+
+
+
+@media (max-width: 768px) { 
+  #hero h1 {
+    font-size: 34px!important;
+    margin-bottom: 20px;
+  }
+  #hero p {
+    font-size: 20px!important;
+  }
+}
+
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .hero-content {
+    margin-top: 100px;
+  }
+}
+
+.container {
+    width: 300px;
+    margin: 100px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+button {
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+#form-style{
+  background: #e4e4e4;
+    padding: 2vh;
+    border-radius: 10px;
+}
+</style>
+
+
+<!-- POP UPS  -->
+<style type="text/css">
+.botpopup {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin: 0 auto;
+  position: fixed;
+  right: 100px;
+  bottom: 80px;
+  text-align: center;
+  z-index: 4000;
+}
+.lenspopup {
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  margin: 0 auto;
+  position: fixed;
+  left: 120px;
+  top: 170px;
+  text-align: center;
+  z-index: 4000;
+}
+    
+.lenspopup:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  box-shadow: 0 1px 14px rgba(0,0,0,.2);
+  background: #fff;
+  position: absolute;
+  z-index: 4000;
+}
+.botpopup:before {
+  content: "";
+  width: 20px;
+  height: 20px;
+  transform: rotate(45deg);
+  box-shadow: 0 1px 14px rgba(0,0,0,.2);
+  background: #fff;
+  position: absolute;
+  z-index: 4000;
+}
+.lenspopup.arrow-top:before {
+    right: calc(96%);
+    top: 20px;
+}
+.botpopup.arrow-top:before {
+    left: calc(95%);
+    top: 40px;
+}
+.lenspopup.arrow-right:before {
+  top: calc(50% - 10px);
+  right: -8px;
+}
+.botpopup.arrow-right:before {
+  top: calc(50% - 10px);
+  right: -8px;
+}
+
+.lenspopup.arrow-bottom:before {
+  left: calc(50% - 10px);
+  bottom: -8px;
+}
+.botpopup.arrow-bottom:before {
+  left: calc(50% - 10px);
+  bottom: -8px;
+}
+.botpopup.arrow-left:before {
+  top: calc(50% - 10px);
+  left: -8px;
+}
+.lenspopup-wrapper {
+  width: 100%;
+  padding: 32px;
+  border-radius: 4px;
+  background: #fff;
+  position: relative;
+  z-index: 4000;  
+}
+.botpopup-wrapper {
+  width: 100%;
+  padding: 32px;
+  border-radius: 4px;
+  background: #fff;
+  position: relative;
+  z-index: 4000;  
+}
+</style>
+{% if session['userid'] %}
+{% else %}
+<style>
+.blur-overlay {
+  pointer-events: none;
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(5px); /* Initial blur value */
+  transition: backdrop-filter 1s ease; /* Transition for smooth effect */
+}
+
+.blur-active {
+    backdrop-filter: blur(0px); /* Blur value when the class is active */
+}
+</style>
+{% endif %}
+
+<style>
+#cityStateCountry {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+    font-size: 25px;
+    padding: 20px;
+    text-transform: capitalize;
+}
+#city {
+  font-size: 30px;
+    text-transform: capitalize;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+</style>
+<!-- END OF POP UPS -->
+<html>
+<body>
+<!--CHAT BOT POP UP -->
+{% if session['userid'] %}
+{% else %}
+<div class="botpopup arrow-top" id="botpopup">
+  <div class="botpopup-wrapper">
+    <p style="color: black; font-size: 19px;">Let's chat with our bot 😊</p>
+    <div>
+    </div>
+  </div>
+</div>
+<div class="botpopupbackground"></div>
+<!-- END OF POP -->
+
+<!--GOOGLE LENS POP UP -->
+<div class="lenspopup arrow-top" id="lenspopup">
+  <div class="lenspopup-wrapper">
+    <p style="color: black; font-size: 19px;">Search with an image 😊</p>
+    <div>
+    </div>
+  </div>
+</div>
+<div class="botpopupbackground"></div>
+<!-- END OF POP -->
+{% endif %}
+<!-- MAIN SEARCH -->
+<section class="banner-bg-splash h-100vh bg-holder " data-jarallax='{"speed": 0.6}' data-jarallax-video="https://www.youtube.com/watch?v=35npVaFGHMY" id="main-search">
+  <div class="container h-100">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-md-10 text-center align-self-center position-relative">
+        <h1 class="text-white mb-3">TRIP ORGANIZER</h1>
+        <span class="text-white ">We are here to solve all your travel problems</span>
+        <div class="row justify-content-center">
+          <div class="col-md-9">
+            <div class="search mt-4">
+              <form action="{{ url_for('search_city') }}" id="home-search-form" method="POST">
+                <div>
+                  <div>
+                    <input type="text" class="form-control border-0" placeholder="Search for Travel" name="search_text" id="search_text" required>
+                  </div>
+                  <div>
+                    <input class="btn btn-primary" type="submit" value="Search" id="home_search_btn">
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="blur-overlay" id="blur-overlay"></div>
+</section>
+<!-- END OF HOME SEARCH -->
+
+<section class="search-result" style="background-color: white; width: 100%; padding: 30px;">
+  <div id="result-container"></div>
+  <!-- These are just placeholders, adjust according to your layout -->
+<div id="city"></div>
+<div id="cityStateCountry"></div>
+<div id="relatedImages" class="row"></div>
+<div id="relatedImageslabel" class="row"></div>
+<center>
+<div id="searchpackagelink"></div>
+</center>
+
+  <div id="home_search_preloader" style="display: flex;
+    justify-content: center;
+    height: 50vh;
+    align-items: center;">
+    <div class="">
+      <div id="preloaders">
+        <div class="spinner"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGE/TIMETABLE -->
+<section class="space-ptb bg-holder bgholder" id="bgholder">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <div class="section-title">
+          <!-- <div class="sub-title"><img  class="img-fluid" src="images/title-icon.png" alt="#"><span>A smiling agent for you</span></div> -->
+          <h2 class="title mb-0" style="color: whitesmoke;"> Let our  <strong style="color: rgb(8 62 64);">AI Module </strong> craft your personalized travel itinerary! </h2>
+        </div>
+      </div>
+      <div class="col-lg-6 align-self-end">
+        <nav class="nav-tab">
+          <div class="nav nav-tabs justify-content-lg-end" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link" id="t-form-btn">Customized Travel plan </a>
+            <a class="nav-item nav-link" id="p-form-btn" >Find Packages </a>
+          </div>
+        </nav>
+      </div>
+    </div>
+    
+    <!-- timetable -->
+    <div class="row">
+      <div class="col-12">
+        <!-- H E R O -->
+        <div id="hero">
+          <div class="container">
+            <div class="row">
+              <div class="t-form col-md-12 align-hero content-box hero-content">
+                <br><span>Customize your own Travels</span>
+                <form class="home-search" id="scheduleForm" method="POST" action="{{ url_for('plantrip') }}">
+                  <div class="row g-0 mt-4">
+                    <div class="">
+                      <div class="destination-find-area">
+                        <div>
+                          <input type="text" id="destination" name="destination" class="form-control" placeholder="Destination">
+                          <span class="error-message" id="destinationError"></span>
+                        </div>
+                        <div>
+                          <input type="date" id="departDate" name="departDate" class="form-control" placeholder="Depart Date">
+                          <input type="date" id="endDate" name="endDate" class="form-control" placeholder="end Date" hidden>
+                          <span class="error-message" id="departDateError"></span>
+                        </div>
+                        <div>
+                          <input type="number" id="days" name="days" min="1" class="form-control" placeholder="No of Days">
+                          <span class="error-message" id="daysError"></span>
+                        </div>
+                        <div>
+                          <input type="submit" class="btn btn-primary" value="Create Schedule">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="p-form col-md-12 align-hero content-box hero-content">
+                <br><span>Find a Package for you</span>
+              <form class="home-search" id="package-form" action="{{ url_for('package_search_on_home_form') }}" method="POST">
+                <div class="row g-0 mt-4">
+                    <div class="">
+                      <div class="destination-find-area">
+                        <div>
+                          <input type="text" id="destination_p" name="destination_p" class="form-control" placeholder="Destination">
+                        </div>
+                        <div>
+                          <input type="date" id="departDate_p" name="departDate_p" class="form-control" placeholder="Depart Date">
+                        </div>
+                        <div>
+                          <input type="number" id="days_p" name="days_p" min="1" class="form-control" placeholder="No of Days">
+                        </div>
+                        <div>
+                          <input type="submit" class="btn btn-primary" value="Find Packages">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </form><br><br>
+              <div class="row">
+                  {% for row in tour_packages_data %}
+                  <div class="col-lg-4 col-md-6 mb-4 " style="height: 100vh;">
+                    <div class="listing-item" style="height: 485px">
+                      <div class="listing-image bg-overlay-half-bottom" style="max-height: 200px;">
+                        <img class="img-fluid" src="{{url_for('static', filename=row[10])}}" alt="{{row[10]}}" style="width: 100%; height: 250px;">
+                        <!-- <div class="listing-favourite">
+                          <i class="fa-regular fa-heart"></i>
+                        </div> -->
+                      </div>
+                      <div class="listing-details" style="padding: 8px 8px ">
+                        <div class="listing-title d-flex justify-content-between">
+                          
+                          {% if row[4] <= (session['todate']) %}
+                          <h5 class="mb-0">{{ row[2] }} </h5> <span style="color: red;">(Booking finished..!)</span>
+                          
+                          {% else %}
+                          <h5 class="mb-0"><a href="{{ url_for('tour_package_details', package_id=row[0]) }}" class="title mb-0">{{ row[2] }}</a></h5>
+                          {% endif %}
+
+                          <div class="country-flags">
+                            <!-- <img class="img-fluid shadow-sm" src="images/country-flags/01.jpg" alt="#"> -->
+                          </div>
+                        </div>
+                        <a href="#" class="listing-loaction"> <i class="fa fa-location-dot"></i>{{row[8]}}, {{row[9]}}</a>
+                        <div class="listing-rating d-flex justify-content-between">
+                          <div class="d-flex">
+                            <div class="date me-3">
+                              <i class="fa-regular fa-calendar-days me-2"></i><span>{{ row[4] }}</span>
+                            </div>
+                            <div class="rating">
+                              <i class="fa-solid fa-star me-1 text-yellow"></i><span>
+                                {% if row[11] %}
+                                    {% if rating_true == True %}
+                                      {{ row[11]|round(1) }}
+                                    {% else %}
+                                      {{row[11]|int/5}}</span>
+                                    {% endif %}
+                                {% else %}
+                                    No ratings
+                                {% endif %}
+                            </div>
+                          </div>
+                          <div class="price">
+                            <span class="text-decoration-line-through">{{ row[6]|int - 200 }}</span>{{ row[6] }}
+                          </div>
+                        </div>
+                        <div class="listing-info" style="padding: 5px 0;">
+                          
+                          <p class="mb-0" style="text-transform: capitalize; height: 10vh; overflow: hidden;">{{row[7]}}</p>
+                        </div>
+                        {% if row[4] <= session['todate'] %}
+                          <p class="btn btn-link">See Details</p>
+                        {% else %}
+                          <a href="{{ url_for('tour_package_details', package_id=row[0]) }}" class="btn btn-link">See Details</a>
+                        {% endif %}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</section>
+<!-- END OF PACKAGE/TIMETABLE -->
+
+  <!--=================================
+Blog -->
+<section class="space-ptb" style="background-color: white;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-6">
+        <div class="section-title mb-5 text-center">
+          <div class="sub-title justify-content-center"><img  class="img-fluid" src="images/title-icon.png" alt=""><span>Our blog</span></div>
+          <h2 class="title">Read what we <strong>say in our blog</strong></h2>
+          <p>Focus is having the unwavering attention to complete what you set out to do. There are a million distractions in every facet of our lives.</p>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      {% for row in blog_result%}
+      <div class="col-sm-12 col-md-6 col-lg-4 mb-4 mb-lg-0">
+        <div class="blog">
+          <div class="blog-img">
+            <img  class="img-fluid rounded" src="{{ url_for('static', filename=row[7]) }}" alt="" style="width: 100%; height: 200px; object-fit: fill;">
+          </div>
+          <div class="blog-body d-flex align-items-center">
+            <div class="time-card me-3">
+              <img class="img-fluid rounded me-2" src="{{ url_for('static', filename='images/on-time.svg')}}" alt="">
+              <!--  <i class="fa-regular fa-calendar-days me-2"></i>on-time -->
+              <span>{{ row[1] }}</span>
+            </div>
+            <div class="user d-flex align-items-center me-3">
+              <div class="user-img me-2"></div>
+              <span>{{row[5]}}</span>
+            </div>
+            <div class="comment d-flex align-items-center">
+              
+            </div>
+          </div>
+          <a href="{{ url_for('blog_single', blog_id = row[0], flash='123' )}}" style="text-transform: capitalize;">{{ row[2] }}</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="row mt-4 mt-md-5">
+      <div class="col-12">
+        <hr>
+        <ul class="list-unstyled text-center d-md-flex align-items-center justify-content-center pt-3 mt-md-5 mb-0">
+          <li class="mt-md-0 mx-0 mx-md-4">We have articles on a range of topics</li>
+          <li class="mx-0 mx-md-4 mt-3 mt-md-0"><a href="{{ url_for('blog_home') }}" class="btn btn-primary">View all blogs</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<!--=================================
+Blog -->
+</body>
+</html>
+
+
+
+<!-- AJAX CALLINGN FOR SEARCH RESULT -->
+<!-- AJAX CALLING FOR SEARCH RESULT -->
+
+<!-- AUTOMATICALY RETURN TO RESULT LOADING SECTION OF MAIN PAGE -->
+<script type="text/javascript">
+  $('#home_search_btn').click(function() {
+    var searchText = $('#search_text').val().trim();
+    if (searchText === '') {
+        // Handle case when search text is empty
+    } else {
+        $(".search-result").show();
+        // Show preloader
+        $('#home_search_preloader').show();
+        $('html, body').animate({
+            scrollTop: $('#home-search-form').offset().top
+        }, 5);
+    }
+});
+</script>
+
+<script>
+  $(document).ready(function() {
+    // Attach an event handler to the form submission
+    $("#home-search-form").submit(function(event) {
+        // Prevent the default form submission
+        event.preventDefault();
+
+        // Get the search text value
+        var searchText = $('#search_text').val();
+
+        // If search text is not empty, proceed with AJAX request
+        if (searchText.trim() !== '') { // Check if search text is not empty or only whitespace
+            var formData = {
+                'search_text': searchText
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for("search_city") }}',
+                data: formData,
+                dataType: 'json',
+                success: function(data) {
+                    $('html, body').animate({
+                        scrollTop: $('#home-search-form').offset().top
+                    }, 5);
+                    $('#home_search_preloader').hide();
+                    $('#city').text(data.city);
+                    $('#cityStateCountry').text(data.city_state_country);
+
+                    var packagelink = $('#searchpackagelink');
+                    var packageHtml = '<div class="col-lg-3 col-md-3">' +
+                        '<a href="{{ url_for("user_package_searching_onhome", search_value="'+ data.city +'") }}">Some Packages</a>' +
+                        '</div>';
+
+                    packagelink.append(packageHtml);
+
+                    // Display related images
+                    if (data.search_related_images && data.search_related_images.length > 0) {
+                        var imagesContainer = $('#relatedImages');
+                        var maxImages = 4; // Maximum number of images to display
+                        for (var i = 0; i < Math.min(data.search_related_images.length, maxImages); i++) {
+                            var image = data.search_related_images[i];
+                            var imageHtml = '<div class="col-lg-3 col-md-3">' +
+                                '<img src="' + image.src + '" alt="' + image.label + '"style="width: 100%; height: 70%; object-fit: contain;">' +
+                                '</div>';
+                            imagesContainer.append(imageHtml);
+                        }
+                    }
+                    // Display related image captions
+                    if (data.search_related_images && data.search_related_images.length > 0) {
+                        var imagesContainer = $('#relatedImageslabel');
+                        var maxImages = 4; // Maximum number of images to display
+                        for (var i = 0; i < Math.min(data.search_related_images.length, maxImages); i++) {
+                            var image = data.search_related_images[i];
+                            var imageHtml = '<div class="col-lg-3 col-md-3">' +
+                                '<a class="searchLink" href="#" data-label="' + image.label + '">' + image.label + '</a>' +
+                                '</div>';
+                            imagesContainer.append(imageHtml);
+                        }
+                    }
+                },
+                error: function(error) {
+                    console.log("Error:", error);
+                }
+            });
+        }
+    });
+});
+</script>
+
+<!-- END OF AJAX CALLING -->
+
+<!-- google search -->
+<!-- JavaScript -->
+<script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function() {
+        var searchLinks = document.getElementsByClassName('searchLink');
+        for (var i = 0; i < searchLinks.length; i++) {
+            searchLinks[i].addEventListener('click', function(event) {
+                event.preventDefault(); // Prevent default link behavior
+
+                var searchValue = this.getAttribute('data-label'); // Get the value from data-label attribute
+                var googleSearchUrl = 'https://www.google.com/search?q=' + encodeURIComponent(searchValue);
+
+                // Redirect to Google search
+                window.location.href = googleSearchUrl;
+            });
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".p-form").hide();
+    $("#p-form-btn").click(function(){
+      $(".p-form").show();
+      $(".t-form").hide();
+      $("#p-form-btn").css("color", "rgb(18 156 160)");
+      $("#t-form-btn").css("color", "white");
+    });
+
+    $("#t-form-btn").click(function(){
+      $(".t-form").show();
+      $(".p-form").hide();
+      $("#t-form-btn").css("color", "rgb(18 156 160)");
+      $("#p-form-btn").css("color", "white");
+    });
+  })
+</script>
+
+
+<!-- VALIDATION OF TIME TABLE -->
+<script type="text/javascript">
+  $(document).ready(function () {
+  $('#scheduleForm').submit(function (e) {
+    // Clear previous error messages
+    $('.error-message').text('');
+
+    // Validate destination
+    var destination = $('#destination').val();
+    if (destination.trim() === '') {
+      var newPlaceholder = "Destination is required*";
+      $('#destination').attr('placeholder', newPlaceholder);
+      e.preventDefault(); // Prevent form submission
+    }
+
+    // Validate depart date
+    var departDate = $('#departDate').val();
+    if (departDate.trim() === '') {
+      var newPlaceholder = "Depart Date is required*";
+      $('#departDate').attr('placeholder', newPlaceholder);
+      e.preventDefault(); // Prevent form submission
+    }
+
+    // Validate number of days
+    var days = $('#days').val();
+    if (isNaN(days) || days < 1) {
+      var newPlaceholder = "Please enter a valid number of days (minimum 1)*";
+      $('#days').attr('placeholder', newPlaceholder);
+      e.preventDefault(); // Prevent form submission
+    }
+  });
+});
+</script>
+
+<!-- END TIME TABLE VALIDATION -->
+
+<!-- VALIDATION OF PACKAGE FORM -->
+<script type="text/javascript">
+  $(document).ready(function () {
+  $('#package-form').submit(function (e) {
+    // Clear previous error messages
+    $('.error-message').text('');
+
+    // Validate destination
+    var destination = $('#destination_p').val();
+    if (destination.trim() === '') {
+      var newPlaceholder = "Required*";
+      $('#destination_p').attr('placeholder', newPlaceholder);
+      e.preventDefault(); // Prevent form submission
+    }
+
+    // Validate depart date
+    var departDate = $('#departDate_p').val();
+    if (departDate.trim() === '') {
+      var newPlaceholder = "Required*";
+      $('#departDate_p').attr('placeholder', newPlaceholder);
+      e.preventDefault(); // Prevent form submission
+    }
+
+    // Validate number of days
+    var days = $('#days_p').val();
+    if (isNaN(days) || days < 1) {
+      var newPlaceholder = "Required*";
+      $('#days_p').attr('placeholder', newPlaceholder);
+      e.preventDefault(); // Prevent form submission
+    }
+  });
+});
+</script>
+
+<!-- POP UP -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var botpopup = document.getElementById('botpopup');
+  var botpopupbackground = document.querySelector('.botpopupbackground');
+  var body = document.querySelector('body');
+
+  // Show the botpopup when the page loads
+  botpopup.style.display = 'block';
+
+  // Automatically hide the botpopup after 5 seconds
+  setTimeout(function() {
+    botpopup.style.display = 'none';
+    body.classList.add('blur');
+    botpopupbackground.classList.add('blur');
+  }, 4000);
+});
+</script>
+
+<!--LENS POP UP -->
+<script type="text/javascript">
+document.addEventListener('DOMContentLoaded', function() {
+  var lenspopup = document.getElementById('lenspopup');
+  var botpopupbackground = document.querySelector('.botpopupbackground');
+  var body = document.querySelector('body');
+
+  // Show the lenspopup when the page loads
+  lenspopup.style.display = 'block';
+
+  // Automatically hide the lenspopup after 5 seconds
+  setTimeout(function() {
+    lenspopup.style.display = 'none';
+    body.classList.add('blur');
+    botpopupbackground.classList.add('blur');
+  }, 4000);
+});
+</script>
+
+{% if session['userid'] %}
+{% else %}
+<!-- BLUR THE BODY PART -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get the blur overlay element
+        var blurOverlay = document.getElementById('blur-overlay');
+        $('html, body').css({
+                  'overflow': 'hidden',
+                  'height': '100%'
+        });
+
+        // Add the 'blur-active' class after a delay of 5 seconds
+        setTimeout(function() {
+            blurOverlay.classList.add('blur-active');
+               $('html, body').css({
+                  'overflow': 'auto',
+                  'height': 'auto'
+              });
+        }, 4000);
+    });
+</script>
+{% endif %}
+<!-- END POP UP -->
+
+<!-- AUTO END DATING IN TOUR PLANING FORM -->
+<script>
+  document.getElementById('days').addEventListener('input', function() {
+    var departDate = document.getElementById('departDate').value;
+    var days = parseInt(this.value);
+
+    if (departDate && !isNaN(days)) {
+      var endDate = new Date(departDate);
+      endDate.setDate(endDate.getDate() + days);
+      document.getElementById('endDate').valueAsDate = endDate;
+    }
+  });
+</script>
+{% endblock%}

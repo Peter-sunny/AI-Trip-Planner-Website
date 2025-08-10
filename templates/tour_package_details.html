@@ -1,0 +1,497 @@
+{% extends 'base.html' %}
+{% block content %}
+
+  <!--=================================
+  Tour Grid -->
+
+  <style type="text/css">
+      .star {
+            font-size: 30px;
+            cursor: pointer;
+        }
+  </style>
+
+
+  <section class="space-ptb">
+    <div class="container">
+      <div class="row">
+        {% for row in tour_packages_data %}
+        <div class="col-md-12">
+          <div class="listing-item listing-item-details">
+            <div class="listing-details">
+              <div class="listing-title d-flex justify-content-between mb-4">
+                <h4 class="mb-0"><a href="#" class="title mb-0">{{ row[2] }}</a></h4>
+                <div class="country-flags">
+                  <img class="img-fluid shadow-sm" src="images/country-flags/02.jpg" alt="">
+                </div>
+              </div>
+              <div class="listing-rating row d-flex justify-content-between align-items-center">
+                <div class="col-lg-7">
+                  <div class="d-sm-flex align-items-center">
+                    <div class="date me-3 mb-3 mb-sm-0">
+                      <i class="fa-regular fa-calendar-days me-2"></i><span> {{ row[4] }}  </span>
+                    </div>
+                    <div class="rating mb-3 mb-sm-0">
+                      <span>Days {{ row[3] }}</span>
+                    </div>
+                    <a href="#" class="listing-loaction ms-sm-4"><i class="fa fa-location-dot"></i>{{row[8]}}, {{row[9]}}</a>
+                  </div>
+                </div>
+                <div class="col-lg-5">
+                  <div class="d-sm-flex align-items-center ms-auto justify-content-lg-end">
+                    <div class="price me-sm-4 mb-3 mb-sm-0">
+                      <span class="text-decoration-line-through">{{ row[6]|int - 200 }}</span>{{ row[6] }}
+                    </div>
+                    <a href="#" class="btn btn-primary"><i class="fa-solid fa-circle-check fa-xl me-2"></i> Verified Tour</a>
+                  </div>
+                </div>
+              </div>
+              <div class="listing-favourite mt-4">
+                
+                <a href="{{ url_for('tour_package_saving', package_id=row[0]) }}" class="btn btn-light btn-md me-2 me-lg-3 mb-3"><i class="fa-solid fa-download me-2" id="save-btn"></i>Save</a>
+
+                <!-- <a href="#" class="btn btn-light btn-md me-2 me-lg-3 mb-3"><i class="fa-solid fa-bookmark me-2"></i>Bookmark</a> -->
+                <!-- <a href="#" class="btn btn-light btn-md me-2 me-lg-3 mb-3"><i class="fa-solid fa-note-sticky me-2"></i>Write a review</a> -->
+                <a href="#" class="btn btn-light btn-md me-2 me-lg-3 mb-3"><i class="fa-solid fa-share-nodes me-2"></i>Share</a>
+                <a href="#review-section" class="btn  btn-md me-2 me-lg-3 mb-3"><i class="fa-solid fa-star" style="color: #ffc23d;"></i></i>
+                  {% if average_rating %}
+                    {% for row in average_rating %}
+                      {% if row[0] is not none %}
+                        <b>{{ row[0]|round(1) }}</b> ({{ row[1] }} reviews)
+                      {% else %}
+                          No Ratings 
+                      {% endif %}
+                    {% endfor %}
+                    </a>
+                  {% else %}
+                  No Ratings
+                  {% endif %}
+                
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="listing-detail-page">
+                  <div class="listing-detail-box">
+                    <div class="listing-image bg-overlay-half-bottom">
+                      <img class="img-fluid" src="{{url_for('static', filename=row[10])}}" alt="{{row[10]}}">
+                    </div>
+                    <div class="mt-4">
+                      <div class="detail-title">
+                        <h5 class="fw-600">Listing Description</h5>
+                      </div>
+                      <p>{{ row[7] }}</p>
+                    </div>
+                  </div>
+
+                  {% endfor %}
+
+                  <div class="listing-detail-box">
+                    <div class="detail-title">
+                      <h5 class="fw-600">Day Programmes</h5>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div class="accordion" id="accordionExample">
+                          <!--  -->
+                          {% for row in tour_packages_day %}
+                          <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            {{ row[3] }} - {{ row[4] }}
+                            </button>
+                            </h2>
+       <!--                   <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                <div class="row">
+                                  <div class="col-sm-3">
+                                    <img class="img-fluid border-radius" src="images/listing/14.jpg" alt="">
+                                  </div>
+                                  <div class="col-sm-9">
+                                    
+                                  </div>
+                                </div>
+                              </div>
+                            </div> -->
+                          </div>
+                          {% endfor %}
+                          <!--  -->
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="listing-detail-box popup-gallery">
+                    <div class="detail-title">
+                      <h5 class="fw-600">Form Our Gallery</h5>
+                    </div>
+                    <div class="row g-2">
+                      <!--  -->
+                    {% for row in tour_packages_image %}
+                      <div class="col-md-6">
+                        <div class="portfolio portfolio-style-03 mb-0 rounded">
+                          <div class="portfolio-images">
+                            <img class="img-fluid rounded " src="{{url_for('static', filename=row[3])}}" alt="kl">
+                            <div class="portfolio-info-02">
+                              <a class="portfolio-img popup-icon" href="{{url_for('static', filename=row[3])}}"> <i class="fas fa-plus"></i> </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    {% endfor %}
+                      <!--  -->
+
+
+                    </div>
+                  </div>
+
+                  <!-- Review form -->
+                  {% if user_travaled %}
+                  <div class="listing-detail-box mb-lg-0" id="review_section">
+                    <div class="detail-title">
+                      <h5 class="fw-600">Add a Review</h5>
+                    </div>
+                    <form action="{{ url_for('review_adding') }}" method="POST" id="Review-adding-form">
+                      <div class="row">
+                        <div class="mb-3 col-md-12">
+                          <div class="ratings">
+                            <div id="star-rating">
+                                <span class="star" onclick="setRating(1)" id="star1">★</span>
+                                <span class="star" onclick="setRating(2)" id="star2">★</span>
+                                <span class="star" onclick="setRating(3)" id="star3">★</span>
+                                <span class="star" onclick="setRating(4)" id="star4">★</span>
+                                <span class="star" onclick="setRating(5)" id="star5">★</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                          <label class="form-label">Your message</label>
+                          <input type="hidden" id="rating-input" name="rating">
+                          {% for row in tour_packages_data %}
+                          <input type="hidden" name="package_id" value="{{ row[0] }}">
+                          {% endfor %}
+                          <textarea class="form-control" rows="4" placeholder="Your message" name="review" required></textarea>
+                        </div>
+                        <div class="col-md-12">
+                          <input class="btn btn-primary" type="submit" value="Submit Review">
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  {% endif %}
+
+                  <!-- End Review form -->
+
+                  <!-- Listing Location -->
+                 <!--  <div class="listing-detail-box">
+                    <div class="detail-title">
+                      <h5 class="fw-600">Listing Location </h5>
+                    </div>
+                    <iframe style="width: 100%; height: 300px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95373531590414!3d-37.817323442021134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1559822357848!5m2!1sen!2sin"></iframe>
+                  </div> -->
+                  <!-- End -->
+
+
+                  <!-- Reviews -->
+                  <div class="listing-detail-box reviews-box" id="review-section">
+                    <div class="detail-title">
+                      <h5 class="fw-600">Reviews</h5>
+                    </div>
+                    <div class="row">
+                      {% for row in package_reviews %}
+                      <div class="col-md-12">
+                        <div class="d-block d-md-flex mb-4">
+                          <div class="avatar mb-3">
+                            <img src="{{url_for('static', filename=row[6])}}" class="rounded-circle img-fluid" alt="">
+                          </div>
+                          <div class="p-4 border border-radius-sm ms-0 ms-md-3" style="width: 100%;">
+                            <div class="d-flex align-items-center">
+                              <h6 class="mt-0">{{ row[5] }}</h6>
+                              <div class="d-flex ms-auto mb-3">
+                                <span class="px-2 border text-success border-radius-sm d-inline-block me-2"> {{ row[4] }}.0</span>
+                                <ul class="list-unstyled d-flex mb-0">
+                                    {% for i in range(1, 6) %}
+                                        {% if i <= row[4] %}
+                                            <li><i class="fas fa-star text-warning"></i></li>
+                                        {% else %}
+                                            <li><i class="far fa-star text-light"></i></li>
+                                        {% endif %}
+                                    {% endfor %}
+                                    {% if row[1] == session['userid'] %}
+                                    <a href="{{ url_for('review_deleting', review_id=row[0], package_id=row[2])}}" style="margin-left: 10px;"><i class="fa-solid fa-trash" style="color: #f10909;"></i></a>
+                                    {% endif %}
+                                </ul>
+
+                                </ul>
+                              </div>
+                            </div>
+                            <p>{{ row[3] }}</p>
+                          </div>
+                        </div>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                  
+
+                  <!-- end -->
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="sidebar mb-0">
+                  <div class="widget">
+                    <div class="widget-title">
+                      <a class="collapse-title" data-bs-toggle="collapse" href="#filters">
+                        Booking<i class="fas fa-minus-circle"></i>
+                      </a>
+                    </div>
+                    <div class="widget-content">
+                      <div class="pb-3">
+                        <div class="collapse show" id="filters">
+                          <!-- Booking Form start -->
+                          <!--  -->
+                          <form action="{{url_for('tour_package_booking_payment')}}" method="POST" onsubmit="return validateForm()">
+                                <div class="mb-3 datetimepickers">
+
+                                <!-- START BOOKING FORM  -->
+                                {% for row in tour_packages_data %}
+                                  <input type="text" name="package_id" class="form-control datetimepicker-input" placeholder="Name" value="{{ row[0] }}" hidden>
+                                  <input type="text" name="pro_id" class="form-control datetimepicker-input" placeholder="Name" value="{{ row[1] }}" hidden>
+                                  <input type="text" name="price" class="form-control datetimepicker-input" placeholder="Name" value="{{ row[6] }}" hidden>
+                                  <input type="text" name="package_name" class="form-control datetimepicker-input" placeholder="Name" value="{{ row[2] }}" hidden>
+                                {% endfor %}
+                                <label id="message" style="color: red;"></label>
+                                <div class="mb-3 select-border">
+                                  <input type="text" name="username" class="form-control datetimepicker-input" placeholder="Name" id="username">
+                                </div>
+                                <div class="mb-3 select-border">
+                                  <input type="text" name="phone" class="form-control datetimepicker-input" placeholder="Phone Number"  id="phone_number">
+                                </div>
+                                 <div class="mb-3 select-border">
+                                  <input type="text" name="user_identity_document" class="form-control datetimepicker-input" placeholder="ID/PASSPORT" id="user_identity_document">
+                                </div>
+                                 <label>Number of People: <span class="days-label" style="color: red;"></span></label>
+                                <input class="form-control" type="text" name="days" id="days" value="0">
+
+                                <div class="form-group" id="day-program-container"></div>
+
+                                <div class="pt-0">
+                                    <div class="mb-0 d-grid">
+                                    {% for row in tour_packages_data %}
+                                      {% if row[4] <= (session['todate']) %}
+                                            <input type="button" class="btn btn-primary d-grid" value="Date Expired" style="color: red;">
+                                      {% else %}
+                                        <input type="submit" class="btn btn-primary d-grid" value="Request Booking">
+                                      {% endif %}
+                                     {% endfor %}
+                                    </div>
+                                </div>
+                            <!-- END  -->
+                          </form>
+                          <!-- Booking Form end -->
+                      </div>
+                    </div>
+                  </div>
+                  <div class="widget">
+                    <div class="widget-title">
+                      <h5 class="mb-0 fw-600"> OPARATOR DETAILS </h5>
+                    </div>
+                    <div class="widget-content">
+                      {% for row in pro_user_details %}
+                      <!-- <iframe style="height: 200px; width: 100%;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.835434509374!2d144.95373531590414!3d-37.817323442021134!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sin!4v1559822357848!5m2!1sen!2sin"></iframe> -->
+                      <ul class="list-unstyled mb-3 mt-4 d-block">
+                        <li class="mb-2"><strong class="text-dark d-inline-block me-2">Name :</strong>{{ row[2] }}</li>
+                        <li class="mb-2"><strong class="text-dark d-inline-block me-2">Address:</strong>{{row[10]}}, {{row[5]}}, {{row[4]}}</li>
+                        <li class="mb-2"><strong class="text-dark d-inline-block me-2">E-mail:</strong>{{row[3]}}</li>
+                        <li class="mb-2"><strong class="text-dark d-inline-block me-2">Phone:</strong>{{row[8]}}</li>
+                        <li class="mb-2"><strong class="text-dark d-inline-block me-2"></li>
+                      </ul>
+                      <ul class="list-unstyled mb-0 d-flex mt-3">
+                        <li><a class="px-3 py-2 d-block bg-light border-radius me-2" href="#"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a class="px-3 py-2 d-block bg-light border-radius me-2" href="#"><i class="fab fa-twitter"></i></a></li>
+                        <li><a class="px-3 py-2 d-block bg-light border-radius me-2" href="#"><i class="fab fa-linkedin-in"></i></a></li>
+                        <li><a class="px-3 py-2 d-block bg-light border-radius me-2" href="#"><i class="fab fa-behance"></i></a></li>
+                      </ul>
+                      {% endfor %}
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% if flash %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="msg-alert-box">
+    <strong></strong> {{ flash }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close" onclick="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+{% if delt_flash %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="msg-alert-box">
+    <strong></strong> {{ delt_flash }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close" onclick="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+
+
+<script>
+    $(document).ready(function() {
+        $('#submitReview').click(function() {
+            var formData = $('#Review-adding-form').serialize();
+
+            $.ajax({
+                type: 'POST',
+                url: '{{ url_for("review_adding") }}',
+                data: formData,
+                success: function(response) {
+                    // Check if the response indicates success
+                    if (response.success) {
+                        // Display the success message
+                        alert(response.message);
+
+                        // Optionally, redirect to another page
+                        // window.location.href = '/success';
+                    } else {
+                        // Handle other scenarios if needed
+                        console.log(response.message);
+                    }
+                },
+                error: function(error) {
+                    // Handle error, e.g., show an error message
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+
+
+
+<!-- star rating  -->
+    <script>
+        function setRating(rating) {
+            // Update the color of stars up to the selected star
+            for (let i = 1; i <= 5; i++) {
+                const starElement = document.getElementById(`star${i}`);
+                if (i <= rating) {
+                    starElement.style.color = 'gold';  // Change to your desired color
+                } else {
+                    starElement.style.color = 'gray';  // Reset to the default color
+                }
+            }
+
+            // Set the selected rating in the hidden input field
+            document.getElementById('rating-input').value = rating;
+
+            // You can remove the alert and send the value to the server using AJAX.
+        }
+    </script>
+
+<!-- end -->
+
+  <!-- // JavaScript to add input fields based on the number of days -->
+
+<script>
+  document.getElementById('days').addEventListener('input', function () {
+    const days = parseInt(this.value);
+    const container = document.getElementById('day-program-container');
+
+    // Clear any existing input fields
+    container.innerHTML = '';
+
+    // Create input fields for day programs and corresponding person id inputs
+    for (let i = 1; i <= days; i++) {
+      const dayInput = document.createElement('input');
+      dayInput.className = 'form-control';
+      dayInput.type = 'text';
+      dayInput.name = `personname${i}`;
+      dayInput.placeholder = `Person ${i} Name`;
+      container.appendChild(dayInput);
+
+      const personIdInput = document.createElement('input');
+      personIdInput.className = 'form-control';
+      personIdInput.type = 'text';
+      personIdInput.name = `person_id_${i}`;
+      personIdInput.placeholder = `ID Proof`;
+      container.appendChild(personIdInput);
+
+      // Add a non-breaking space for separation
+      container.appendChild(document.createTextNode('\u00A0'));
+
+    }
+
+    // Update the hidden field with the number of days
+    document.getElementById('num_days').value = days;
+  });
+
+
+// <!-- Booking Form varification -->
+
+    function validateForm() {
+        var username = document.getElementById('username').value;
+        var phone = document.getElementById('phone_number').value;
+        var user_identity_document = document.getElementById('user_identity_document').value;
+        var days = document.getElementById('days').value;
+        
+        // Regular expression to match only characters
+        var lettersOnly = /^[A-Za-z\s]+$/;
+        // Check if any field is empty
+        if (username == "") {
+            document.getElementById("message").innerHTML = "Enter name";
+            return false;
+        }
+
+        else if (!lettersOnly.test(username)) {
+        document.getElementById("message").innerHTML = "Username must contain only letters";
+        return false;
+        }
+
+        else if (username.length < 2) {
+          document.getElementById("message").innerHTML = "Username must be at least 2 characters long";
+          return false;
+        }
+
+        else if (phone == "") {
+            document.getElementById("message").innerHTML = "Enter Phone Number";
+            return false;
+        }
+
+        else if (isNaN(phone)) {
+        document.getElementById("message").innerHTML = "Phone number must be numeric";
+        return false;
+        
+        }
+
+        else if (user_identity_document == "") {
+            document.getElementById("message").innerHTML = "Enter Identity card";
+            return false;
+        }
+        else if (days == "") {
+            document.getElementById("message").innerHTML = "Enter number Companine Travalers";
+            return false;
+        }
+        else if (!/^\d{10}$/.test(phone)) {
+          document.getElementById("message").innerHTML = "Phone number must be 10 digits";
+          return false;
+        }
+        else {
+          return true; // Form is valid, allow submission
+      }
+    }
+</script>
+
+
+
+
+   {% endblock %}
+    <!--=================================
+    Tour Grid -->

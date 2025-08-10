@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <section class="space-ptb">
+        <div class="container">
+          <div class="row">
+            {% if tour_packages_data %}
+               <div class="row justify-content-center">
+                <div class="col-lg-6">
+                  <div class="section-title text-center">
+                    <h2 class="title"><strong>Your Saved Packages</strong></h2>
+                    <div class="description">
+                      <p>Let's SELECT one.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% else %}
+             <div class="row justify-content-center">
+                <div class="col-lg-6">
+                  <div class="section-title text-center">
+                    <h2 class="title"><strong>Nothing Saved..!</strong></h2>
+                    <div class="description">
+                      <p>Start Exploration</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              {% endif %}
+
+            {% for row in tour_packages_data %}
+            <div class="col-lg-4 col-md-6 mb-4" style="height: 100vh">
+              <div class="listing-item">
+                <div class="listing-image bg-overlay-half-bottom">
+                  <img class="img-fluid" src="{{url_for('static', filename=row[10])}}" alt="{{row[10]}}" style="width: 100%; height: 40vh">
+                  <div class="listing-favourite">
+                    <a href="{{ url_for('tour_package_saved_dlt', package_id=row[0]) }}"><i class="fa-solid fa-heart" style="color: red ;"></i></a>
+                  </div>
+                </div>
+                <div class="listing-details">
+                  <div class="listing-title d-flex justify-content-between">
+                    {% if row[4] <= session['todate'] %}
+                    <h5 class="mb-0">{{ row[2] }} </h5> <span style="color: red;">(Booking finished..!)</span>
+                    
+                    {% else %}
+                    <h5 class="mb-0"><a href="{{ url_for('tour_package_details', package_id=row[0]) }}" class="title mb-0">{{ row[2] }}</a></h5>
+                    {% endif %}
+                    <div class="country-flags">
+                      <!-- <img class="img-fluid shadow-sm" src="images/country-flags/01.jpg" alt="#"> -->
+                    </div>
+                  </div>
+                  <a href="#" class="listing-loaction"> <i class="fa fa-location-dot"></i>{{row[8]}}, {{row[9]}}</a>
+                  <div class="listing-rating d-flex justify-content-between">
+                    <div class="d-flex">
+                      <div class="date me-3">
+                        <i class="fa-regular fa-calendar-days me-2"></i><span> Days {{ row[3] }} </span>
+                      </div>
+                      <div class="rating">
+                        <span>{{ row[4] }}</span>
+                      </div>
+                    </div>
+                    <div class="price">
+                      <span class="text-decoration-line-through">{{ row[6]|int - 200 }}</span>{{ row[6] }}
+                    </div>
+                  </div>
+                  <div class="listing-info">
+                    
+                    <p class="mb-0" style="text-transform: capitalize; height: 10vh; overflow: hidden;">{{row[7]}}</p>
+                  </div>
+                  {% if row[4] <= session['todate'] %}
+                    <p class="btn btn-link">See Details</a>
+                  {% else %}
+                    <a href="{{ url_for('tour_package_details', package_id=row[0]) }}" class="btn btn-link">See Details</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+    </section>
+
+
+{% if delt_flash %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="msg-alert-box">
+    <strong></strong> {{ delt_flash }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close" onclick="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+ {% endblock %}

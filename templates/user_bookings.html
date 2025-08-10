@@ -1,0 +1,379 @@
+{% extends 'base.html' %}
+{% block content %}<br>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Oswald');
+
+.fl-left{float: left}
+
+.fl-right{float: right}
+
+.containerd
+{
+  width: 90%;
+  margin: 100px auto
+}
+
+
+
+.row{overflow: hidden}
+
+.card
+{
+	height: 25vh;
+  display: table-row;
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  border-radius: 4px;
+  position: relative
+}
+
+.card + .card{margin-left: 2%}
+
+.date
+{
+  display: table-cell;
+  width: 25%;
+  position: relative;
+  text-align: center;
+  border-right: 2px dashed #dadde6
+}
+
+.date:before,
+.date:after
+{
+  content: "";
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-color: #DADDE6;
+  position: absolute;
+  top: -15px ;
+  right: -15px;
+  z-index: 1;
+  border-radius: 50%
+}
+
+.date:after
+{
+  top: auto;
+  bottom: -15px
+}
+
+.date time
+{
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%)
+}
+
+.date time span{display: block}
+
+.date time span:first-child
+{
+  color: #2b2b2b;
+  font-weight: 600;
+  font-size: 250%
+}
+
+.date time span:last-child
+{
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: -10px
+}
+
+.card-cont
+{
+  display: table-cell;
+  width: 75%;
+  font-size: 85%;
+  padding: 10px 10px 30px 50px
+}
+
+.card-cont h3
+{
+  color: #3C3C3C;
+  font-size: 130%
+}
+
+
+.card-cont > div
+{
+  display: table-row
+}
+
+.card-cont .even-date i,
+.card-cont .even-info i,
+.card-cont .even-date time,
+.card-cont .even-info p
+{
+  display: table-cell
+}
+
+.card-cont .even-date i,
+.card-cont .even-info i
+{
+  padding: 5% 5% 0 0
+}
+
+.card-cont .even-info p
+{
+  padding: 30px 50px 0 0
+}
+
+.card-cont .even-date time span
+{
+  display: block
+}
+
+.card-cont a
+{
+  display: block;
+  text-decoration: none;
+  width: 80px;
+  height: 30px;
+  background-color: #D8DDE0;
+  color: #fff;
+  text-align: center;
+  line-height: 30px;
+  border-radius: 2px;
+  position: absolute;
+  right: 10px;
+  bottom: 10px
+}
+
+.row:last-child .card:first-child .card-cont a
+{
+  background-color: #037FDD
+}
+
+.row:last-child .card:last-child .card-cont a
+{
+  background-color: #F8504C
+}
+
+@media screen and (max-width: 860px)
+{
+  .card
+  {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-bottom: 10px
+  }
+  
+  .card + .card{margin-left: 0}
+  
+  .card-cont .even-date,
+  .card-cont .even-info
+  {
+    font-size: 75%
+  }
+}
+
+</style>
+{% if tour_bookings %}
+	<section class="container">
+  <div class="row">
+  	{% for row in tour_bookings %}
+  	<div class="col-lg-6 col-md-6">
+    <article class="card fl-left">
+      <section class="date">
+        <time datetime="23th feb">
+        	<!-- Assuming row[10] contains the date string '2021-02-23' -->
+        	{% set date_string = row[12] %}
+
+					{% set day = date_string[-2:] %}
+					{% set month = date_string[5:7] %}
+
+				<span>{{ day }}</span><span>
+				{% if month == '01' %}
+					JAN
+				{% elif month == '02' %}
+					FEB
+				{% elif month == '03' %}
+					MAR
+				{% elif month == '04' %}
+					APR
+				{% elif month == '05' %}
+					MAY
+				{% elif month == '06' %}
+					JUN
+				{% elif month == '07' %}
+					JUL
+				{% elif month == '08' %}
+					AUG
+				{% elif month == '09' %}
+					SEP
+				{% elif month == '10' %}
+					OCT
+				{% elif month == '11' %}
+					NOV
+				{% elif month == '12' %}
+					DEC
+				{% endif %}
+
+				<!-- Display the formatted date -->
+				
+				</span>
+       
+        </time>
+      </section>
+      <section class="card-cont">
+        <h3>{{ row[11] }}</h3>
+        <div class="even-date">
+         <i class="fa fa-calendar"></i>
+         <time>
+           <span style="padding-left: 10px">
+           		{% if row[10] <= (session['todate']) %}
+           			<span style="color: red;"> Expired</span>
+           			{% if row[7] == None %}
+     							<span style="text-transform: capitalize;">(Not attendented)</span>
+			     			{% endif %}
+           		{% else %}
+           			Booked on {{row[9]}}
+           		{% endif %}
+           	</span>
+         </time>
+        </div>
+        <div class="even-info">
+          <i class="fa fa-map"  style="padding-right: 10px"></i>
+          <p>
+          	{% if row[10] <= (session['todate']) %}
+          				The Date is Expired
+          	{% else %}
+			          	<!-- Checking the status -->
+			            {% if row[5] == 1 %}
+						        	<span style="color: green;">Status : Accepted</span>
+						      {% elif row[5] == 0 %}
+						       		<span style="color: red;">Status : Rejected</span>
+						      {% else %}
+						       		<span style="color: grey;">Status : Pending</span>
+						      {% endif %}
+			      {% endif %}
+          </p>
+        </div>
+        {% if row[7] != None %}
+        <a href="{{ url_for('tour_package_details', package_id=row[2]) }}#review_section" style="width: 130px; background-color: #3dd1d5">Write Review</a>
+        {% elif row[11] <= (session['todate']) %}
+        <a href="{{ url_for('tour_package_details', package_id=row[2]) }}" style="width: 130px; background-color: grey">Book Again</a>
+        {% else %}
+        <a href="{{ url_for('user_booking_details', booking_id=row[0])}}">Details</a>
+        {% endif %}
+      </section>
+    	</article>
+  	</div><br><br>
+  {% endfor %}
+</div>
+</section>
+
+{% else %}
+<div  style="height: 40vh;
+	width: 100%;">
+<center><h2><strong>You have no bookings..!</strong></h2></center>
+</div>
+{% endif %}
+<br>
+<center><h2>Cancelled Bookings</h2></center>
+<br>
+{% if cancelled_bookings %}
+	<section class="container">
+  <div class="row">
+  	{% for row in cancelled_bookings %}
+  	<div class="col-lg-6 col-md-6">
+    <article class="card fl-left">
+      <section class="date">
+        <time datetime="23th feb">
+          <!-- Assuming row[10] contains the date string '2021-02-23' -->
+        	{% set date_string = row[6] %}
+
+					{% set day = date_string[:2] %}
+					{% set month = date_string[3:6] %}
+
+				<span>{{ day }}</span><span>{{ month }}</span>
+       
+        </time>
+      </section>
+      <section class="card-cont">
+        <h3 style="text-decoration: line-through">{{ row[5] }}</h3>
+        <div class="even-date">
+         <i class="fa fa-calendar"></i>
+         <time>
+           <span style="padding-left: 10px">
+           		Cancelled on : {{ row[6] }}
+           	</span>
+         </time>
+        </div>
+        <div class="even-info">
+          <i class="fa fa-map-marker"  style="padding-right: 10px"></i>
+          <p>
+          	<!-- Checking the status -->
+	        	<span style="color: red;">Status : Cancelled</span><br>
+            <span>Refund is Processing.....</span>
+          </p>
+        </div>
+        <a style="background-color: grey">Details</a>
+      </section>
+    	</article>
+  	</div><br><br>
+  {% endfor %}
+</div>
+</section>
+
+{% endif %}
+
+{% if flash %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="msg-alert-box">
+    <strong></strong> {{ flash }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close" onclick="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+  // Initially show the "Pending" div
+  $("#all_bookings").hide()
+  $("#pending_bookings").show();
+  $("#accepted_bookings").hide();
+  $("#rejected_bookings").hide();
+
+  // Click event handlers for buttons
+  $("#pending_bookings_btn").click(function() {
+    $("#pending_bookings").show();
+    $("#accepted_bookings").hide();
+    $("#rejected_bookings").hide();
+    $("#all_bookings").hide()
+  });
+
+  $("#accepted_bookings_btn").click(function() {
+    $("#pending_bookings").hide();
+    $("#accepted_bookings").show();
+    $("#rejected_bookings").hide();
+    $("#all_bookings").hide()
+  });
+
+  $("#rejected_bookings_btn").click(function() {
+    $("#pending_bookings").hide();
+    $("#accepted_bookings").hide();
+    $("#rejected_bookings").show();
+    $("#all_bookings").hide()
+  });
+  $("#all_bookings_btn").click(function() {
+    $("#pending_bookings").hide();
+    $("#accepted_bookings").hide();
+    $("#rejected_bookings").hide();
+    $("#all_bookings").show()
+  });
+});
+</script>
+
+{% endblock %}

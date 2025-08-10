@@ -1,0 +1,286 @@
+{% extends 'base.html' %}
+{% block content %}
+
+ <!--=================================
+  Blog -->
+
+<style type="text/css">
+  .cbs-1-a {
+  background: white !important;
+    border: 2px solid !important;
+    padding: 5px !important;
+    border-radius: 20px !important;
+}
+
+.cbs-1-a:hover {
+  padding: 7px !important;
+}
+</style>
+
+
+  <section class="space-ptb">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="create-blog-section">
+            <div class="cbs-1">
+              {% if 'userid' in session %}
+              <div>
+                <a class="cbs-1-a" href="{{ url_for('blog_upload') }}">Create your blog</a>
+                <a class="cbs-1-a" href="{{ url_for('profile_blogs') }}">My Blogs</a>
+              </div>
+              {% else %}
+              <a class="cbs-1-a" href="{{ url_for('login') }}">Login to Create your blog</a>
+              {% endif %}
+            </div>
+          </div>
+          {% for row in blog_data %}
+          <div class="box-shadow border-radius p-3 mb-4 mb-sm-5" id="blog_data_div">
+              <div class="blog">
+                  <div class="blog-img">
+                      <img class="img-fluid rounded" src="{{url_for('static', filename=row[7]) }}" alt="#"
+                          style="width: 100%; height: 400px; object-fit: fill;">
+                  </div>
+                  <div class="blog-body d-flex flex-wrap align-items-center">
+                      <div class="time-card me-3 d-flex align-items-center">
+                          <img class="img-fluid rounded me-2"
+                              src="{{ url_for('static', filename='images/on-time.svg')}}" alt="#">
+                          <span>{{row[1]}} By</span>
+                      </div>
+                      <div class="user d-flex align-items-center me-3">
+                          <div class="user-img me-2"><img class="img-fluid" src="{{url_for('static', filename=row[4]) }}" alt="#"></div>
+                          <span style="text-transform: capitalize;">{{row[5]}}</span>
+                      </div>
+                      <div class="comment d-flex align-items-center">
+                          <i class="fa-regular fa-comment me-2"></i>
+                          {{ row[8] }}
+                      </div>
+                  </div>
+                  <a class="title" href="{{ url_for('blog_single', blog_id = row[0], flash='123' )}}">{{row[2]}}</a>
+                  <p class="mt-3">{{row[3]}} ...............</a></p>
+                  <p class="mt-3" style="text-transform: capitalize;">{{row[6]}}</p>
+              </div>
+          </div>
+
+          <!-- Check if this is the appropriate position to insert facts -->
+          {% if loop.index == 2 %} <!-- You can adjust the position as needed -->
+          <div class="box-shadow border-radius p-3 mb-4 mb-sm-5">
+              <div class="blog">
+                  <div class="blog-img">
+                      <!-- You can add an image for the facts section if needed -->
+                  </div>
+                  <div class="blog-body d-flex flex-wrap align-items-center">
+                      <!-- Additional code for user, time, and comment here -->
+                  </div>
+                  <a class="title mt-0" style="color: #3dd1d5 !important">RANDOM FACTS!!</a>
+                  <p class="mt-3 mb-0 text-white">
+                    {% for fact in facts %}
+                        <li style="list-style: none;">"{{ fact[2] }}"</li>
+                    {% endfor %}
+                  </p>
+              </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+
+           <!-- Search Finding Error -->
+          {% if search_error %}
+                    <div class="box-shadow border-radius p-3 mb-4 mb-sm-5">
+              <div class="blog">
+                  <div class="blog-img">
+                      <!-- You can add an image for the facts section if needed -->
+                  </div>
+                  <div class="blog-body d-flex flex-wrap align-items-center">
+                      <!-- Additional code for user, time, and comment here -->
+                  </div>
+                  <a class="title mt-0" style="color: #3dd1d5 !important">{{ search_error }}</a>
+                  <p class="mt-3 mb-0 text-white">
+                    
+                        <li style="list-style: none;"></li>
+                    
+                  </p>
+              </div>
+          </div>
+          {%endif%}
+
+          <!-- Facts  -->
+          {% if facts2 %}
+          <div class="box-shadow border-radius p-3 mb-4 mb-sm-5">
+              <div class="blog">
+                  <div class="blog-img">
+                      <!-- You can add an image for the facts section if needed -->
+                  </div>
+                  <div class="blog-body d-flex flex-wrap align-items-center">
+                      <!-- Additional code for user, time, and comment here -->
+                  </div>
+                  <a class="title mt-0" style="color: #3dd1d5 !important">RANDOM FACTS!!</a>
+                  <p class="mt-3 mb-0 text-white">
+                    {% for fact2 in facts2 %}
+                        <li style="list-style: none;">"{{ fact2[2] }}"</li>
+                    {% endfor %}
+                  </p>
+              </div>
+          </div>
+          {% endif %}
+
+          <div class="box-shadow border-radius p-3 mb-4 mb-sm-5">
+            <div class="blog">
+              <iframe class="border-radius" style="width: 100%; height:420px;" src="https://www.youtube.com/embed/n_Cn8eFo7u8" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+              <div class="blog-body d-flex flex-wrap align-items-center">
+                <div class="time-card me-3 d-flex align-items-center">
+                  <img class="img-fluid rounded me-2" src="images/on-time.svg" alt="#">
+                  <span>Feb 4, 2022 By</span>
+                </div>
+                <div class="user d-flex align-items-center me-3">
+                  <div class="user-img me-2"><img class="img-fluid" src="images/avatar/04.jpg" alt="#"></div>
+                  <span>Sara Lisbon</span>
+                </div>
+                <div class="comment d-flex align-items-center">
+                  <i class="fa-regular fa-comment me-2"></i>
+                  20
+                </div>
+              </div>
+              <a class="title" href="#">How Google’s BERT Algorithm Affects Your Website Traffic</a>
+              <p class="mt-3">There are basically six key areas to higher achievement. Some people will tell you there are four while others may tell you there are eight. One thing for certain though, is that irrespective of the number of steps the experts talk about, they all originate from the same roots.</p>
+            </div>
+          </div>
+
+<!-- Display Blogs Here -->
+
+<!-- Pagination Links -->
+        <!-- Pagination Links -->
+        <div class="row">
+            <div class="col-12">
+                <div class="pagination justify-content-center">
+                    {{ pagination.links }}
+                </div>
+            </div>
+        </div>
+
+        </div>
+        <div class="col-lg-4 mt-5 mt-lg-0">
+          <div class="sidebar">
+            <div class="widget">
+              <div class="widget-title">
+                <h5 class="fw-600">Search</h5>
+              </div>
+              <div class="search">
+                <form action="{{ url_for('blog_search') }}" method="POST" style="display: flex; align-items: center;" name="blog_search_form" id="blog_search_form">
+                    <!-- <i class="fas fa-search" style="margin-right: 10px;"></i> -->
+                    <input type="text" class="form-control" placeholder="Search" style="flex: 1;border-bottom-right-radius: 0px !important;
+                    border-top-right-radius: 0px !important;" name="blog_search_content">
+                    <button type="submit" class="btn btn-primary" style="height: 50px;border-bottom-left-radius: 0px !important;
+                    border-top-left-radius: 0px !important;"><i class="fas fa-search" style="width: 80px"></i></button>
+                </form>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="widget-title">
+                <h5 class="widget-title fw-600">Recent Post</h5>
+              </div>
+              {% for row in latest_blog %}
+              <div class="blog blog-style-2 d-flex align-items-center mb-4">
+                <div class="blog-img me-3">
+                  <img  class="img-fluid" src="{{url_for('static', filename=row[3]) }}" alt="#" style="width: 100%;
+    height: 58px;">
+                </div>
+                <div class="blog-body pt-0">
+                  <div class="time-card me-3 d-flex align-items-center">
+                    <img class="img-fluid rounded me-2" src="{{ url_for('static', filename='images/on-time.svg')}}" alt="#">
+                    <span>{{ row[2] }}</span>
+                  </div>
+                  <a href="{{ url_for('blog_single', blog_id=row[0], flash='123') }}">{{ row[1] }}</a>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class="widget">
+              <div class="widget-title">
+                <h5 class="fw-600">Categories</h5>
+              </div>
+              <div class="widget-categories">
+                <ul class="list-unstyled list-style list-style-underline mb-0">
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='adventure')}} ">Adventure <span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='business')}}">Business Travel <span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='solo')}}">Solo Trip<span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='cruises')}}">Cruises <span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='honeymoons')}}">Honeymoons <span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='nature')}}">Nature <span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                  <li><a class="d-flex" href="{{ url_for('blog_categories', categorie='vacation')}}">Vacation <span class="ms-auto"><i class="fa-solid fa-chevron-right"></i></span></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="widget">
+              <h5 class="widget-title fw-600"> Subscribe & Follow</h5>
+              <div class="widget-content mt-4">
+                <div class="social">
+                  <ul class="list-unstyled mb-0">
+                    <li class="facebook">
+                      <a href="#"> <i class="fab fa-facebook-f me-3"></i>Facebook</a>
+                      <a class="follow ms-auto" href="#">Like </a>
+                    </li>
+                    <li class="twitter">
+                      <a href="#"> <i class="fab fa-twitter me-3"></i>twitter</a>
+                      <a class="follow ms-auto" href="#">followers </a>
+                    </li>
+                    <li class="youtube">
+                      <a href="#"> <i class="fab fa-youtube me-3"></i>youtube</a>
+                      <a class="follow ms-auto" href="#">Subscribers </a>
+                    </li>
+                    <li class="instagram">
+                      <a href="#"> <i class="fab fa-instagram me-3"></i>instagram</a>
+                      <a class="follow ms-auto" href="#">followers </a>
+                    </li>
+                    <li class="linkedIn mb-0">
+                      <a href="#"> <i class="fab fa-linkedin-in me-3"></i>linkedIn</a>
+                      <a class="follow ms-auto" href="#">followers </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% if flash != '' and flash != '123' %}
+  <div class="alert alert-warning alert-dismissible fade show" role="alert" id="msg-alert-box">
+    <strong></strong> {{ flash }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close" onclick="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+{% endif %}
+{% if delt_flash %}
+  <div class="alert alert-warning alert-dismissible fade show ff" role="alert" id="msg-alert-box">
+    <strong></strong> {{ delt_flash }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close" onclick="closeAlert()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <!--=================================
+  Blog -->
+{% endif %}
+<!-- <script>
+    // Listen for the form submission event
+    $('#blog_search_form').submit(function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        // Perform an AJAX POST request to the blog_search route
+        $.ajax({
+            type: 'POST',
+            url: '/blog_search', // Replace with your actual route
+            data: $(this).serialize(), // Serialize the form data
+            success: function(response) {
+                // Update the content on the blog_home page
+                $('#blog_home_content').html(response);
+            },
+            error: function(error) {
+                console.error('AJAX error:', error);
+            }
+        });
+    });
+</script> -->
+{% endblock %}

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTML5 Template" />
+    <meta name="description" content="Ciyatrip - Tour & Travel Hotel Booking HTML Template" />
+    <meta name="author" content="potenzaglobalsolutions.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title></title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+    <!-- CSS Global Compulsory (Do not remove)-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome/all.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" />
+    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datetimepicker/datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl-carousel/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate/animate.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper/swiper.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/range-slider/ion.rangeSlider.css') }}" />
+
+    <!-- Template Style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+
+	<!-- BOOTSTRAP 5 CDN -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	<!-- JQUERY AJAX CDN -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- jQuery CDN -->
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+    <!-- CSS Global Compulsory (Do not remove)-->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome/all.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" />
+    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
+
+        <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/select2/select2.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/datetimepicker/datetimepicker.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/owl-carousel/owl.carousel.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/animate/animate.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/swiper/swiper.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/range-slider/ion.rangeSlider.css') }}" />
+    <!-- Template Style -->
+
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+
+    <!-- Internal js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.appear.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+        
+<style>
+#preloader {
+  background-color: black;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.spinner {
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(82, 0, 255, 0) 0deg,
+    #5200ff 360deg
+  );
+  animation: spin 2s infinite linear;
+}
+.spinner::before {
+  content: "";
+  border-radius: 50%;
+  width: 80%;
+  height: 80%;
+  background-color: #000;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+</style>
+<div id="preloader">
+  <div class="spinner"></div>
+</div>
+</head>
+
+<body>
+
+	<header class="header header-sticky default" style="background-color: black;">
+      <div class="topbar d-none d-md-block">
+        <div class="container">
+          <div class="topbar-inner">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-lg-flex align-items-center text-center">
+                  <div class="topbar-left mb-2 mb-lg-0">
+                    <div class="topbar-call d-inline-flex">
+                      <a href="mailto:info@example.com"><img src="images/phone.svg" alt="#"> Call Services  +126-632-2345</a>
+                    </div>
+                    <div class="me-auto d-inline-flex">
+                      <a href="tel:1-800-555-1234"><i class="fa-solid fa-location-dot me-2"></i>220E Front St. Burlington NC 27215</a>
+                    </div>
+                  </div>
+                  <div class="topbar-right ms-auto justify-content-center">
+                    <div class="social d-inline-flex">
+                      <ul class="list-unstyled" >
+                        <li><a href="#"> <i class="fa-brands fa-facebook-f"></i> </a></li>
+                        <li><a href="#"> <i class="fab fa-twitter"></i> </a></li>
+                        <li><a href="#"> <i class="fa-brands fa-linkedin"></i> </a></li>
+                        <li><a href="#"> <i class="fab fa-instagram"></i> </a></li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-static-top navbar-expand-lg">
+        <div class="container main-header position-relative">
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"><i class="fas fa-align-left"></i></button>
+          <a class="navbar-brand" href="{{ url_for('pro_account') }}">
+            <p class="img-fluid">{{ session['prousercompany'] }}</p>
+          </a>
+          <div class="navbar-collapse collapse justify-content-end justify-content-lg-center">
+            <ul class="nav navbar-nav">
+              <li class="nav-item dropdown {% if 'pro_account' in request.url_rule.endpoint %}active{% endif %}">
+                <a class="nav-link" href="{{ url_for('pro_account') }}" role="button" >Home</i></a>
+              </li>
+
+              
+
+              <li class="nav-item dropdown {% if 'pro_tour_packages' in request.url_rule.endpoint %}active{% endif %}">
+                <a class="nav-link" href="{{ url_for('pro_tour_packages') }}" role="button">Tour Packages</i></a>
+              </li>
+
+              <li class="nav-item dropdown {% if 'bookings' in request.url_rule.endpoint %}active{% endif %}">
+                 <a class="nav-link" href="{{ url_for('bookings') }}">Bookings</i></a>
+              </li>
+              <li class="nav-item dropdown  {% if 'pro_settings'  in request.url_rule.endpoint %}active{% endif %}">
+                <a class="nav-link" href="{{ url_for('pro_settings') }}"><i class="fa-solid fa-user"></i>
+              </i></a>
+              </li>
+
+              <li class="nav-item dropdown {% if 'pro_notifications'  in request.url_rule.endpoint %}active{% endif %}">
+                <a class="nav-link" href="{{ url_for('pro_notifications')}}" role="button" ><i class="fa-solid fa-envelope"></i>
+                {% if session['pro_notification_num'] %}
+                <b style="color: #3dd1d5">({{ session['pro_notification_num'] }})</b>
+                {% else %}
+                (0)
+                {% endif %}</a>
+              </li>
+             <!-- <a href="sign-up.html" class="btn btn-primary menu-btn ms-4 d-none d-xl-block">Sign In</a> -->
+            </div>
+
+            <!-- box user+notification -->
+
+              <!--end box  -->
+            </ul>
+          </div>
+        </div>
+        </nav>
+    </header>
+      
+    <!--=================================
+    Header -->
+
+
+	{% block content %}
+
+	{% endblock %}
+
+
+	      <!--=================================
+footer-->
+<footer class="footer">
+  <div class="min-footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-4 col-md-12">
+          <a class="footer-logo" href="index.html">
+            <img class="img-fluid" src="{{ url_for('static', filename='images/mainlogo.png') }}" alt="logo" width="50" height="50">
+            <h6>TripOrganizer.com</h6>
+          </a>
+          <p class="mt-4 mb-0">Give yourself the power of responsibility. Remind yourself the only thing stopping you is yourself.</p>
+          <div class="social-icon mt-4 mt-lg-5">
+            <ul>
+              <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+              <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mt-md-5 mt-lg-0">
+          <div class="footer-link">
+            <h6 class="footer-title fw-600">Contact Travel</h6>
+            <div class="footer-contact-info">
+              <ul class="list-unstyled mb-0">
+                <li><img class="img-fluid" src="{{ url_for('static', filename='images/address.png') }}" alt="#"><span class="address">17504 Carlton Cuevas Rd, Gulfport, MS, 39503</span></li>
+                <li><img class="img-fluid" src="{{ url_for('static', filename='images/phone.png') }}" alt="#"><span class="phone">+(704) 279-1249</span></li>
+                <li><img class="img-fluid" src="{{ url_for('static', filename='images/email.png') }}" alt="#"><span class="email">TripOrganizer@yahoo.com</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mt-md-5 mt-lg-0 position-relative">
+          <img class="img-fluid footer-map" src="{{ url_for('static', filename='images/footer-map.png') }}" alt="logo">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row align-items-center copyright">
+        <div class="col-12 col-md-6 text-center text-md-start">
+          <div class="copyright-menu footer-menu">
+            <ul class="mb-0 justify-content-center justify-content-md-start">
+              <li><a class="text-black" href="#">Term & Conditions</a></li>
+              <li><a class="text-black" href="#">Privacy Policy </a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 text-center text-md-end mt-2 mt-md-0">
+          <p class="mb-0"> &copy; Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="{{ url_for('pro_account') }}"> TripOrganizer </a> All Rights Reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--=================================
+footer-->
+
+<!--=================================
+Back To Top-->
+<div id="back-to-top" class="back-to-top">
+  <a href="#"><i class="fas fa-angle-up"></i></a>
+</div>
+<!--=================================
+Back To Top-->
+</body>
+</html>
+ <!-- JS Global Compulsory (Do not remove)--> 
+
+<script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.appear.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+<!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
+<script src="{{ url_for('static', filename='js/datetimepicker/moment.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/datetimepicker/datetimepicker.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl-carousel/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/swiper/swiper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/select2/select2.full.js') }}"></script>
+<script src="{{ url_for('static', filename='js/swiperanimation/SwiperAnimation.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/range-slider/ion.rangeSlider.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/countdown/jquery.downCount.js') }}"></script>
+<!-- Template Scripts (Do not remove)-->
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<!-- Template Scripts (Do not remove)-->
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+<!-- Preloader scripts go here -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Hide the preloader when the content is loaded
+        var preloader = document.getElementById("preloader");
+        preloader.style.display = "none";
+    });
+</script>
+
+
+

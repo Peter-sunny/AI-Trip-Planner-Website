@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+	<!-- BOOTSTRAP 5 CDN -->
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+	<!-- JQUERY AJAX CDN -->
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- jQuery CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+	<!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
+
+    <!-- CSS Global Compulsory (Do not remove)-->
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome/all.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap/bootstrap.min.css') }}" />
+    <!-- Page CSS Implementing Plugins (Remove the plugin CSS here if site does not use that feature)-->
+
+
+	  <!-- Internal CSS -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+
+    <!-- Internal js -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.appear.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/popper/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+        
+</head>
+
+<!-- Removing border of flash message box -->
+<style type="text/css">
+  .alert-warning {
+    border: 0px !important;
+  }
+
+#preloader {
+  background-color: #fff;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  display: grid;
+  place-items: center;
+}
+
+.spinner {
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    rgba(82, 0, 255, 0) 0deg,
+    #5200ff 360deg
+  );
+  animation: spin 2s infinite linear;
+}
+.spinner::before {
+  content: "";
+  border-radius: 50%;
+  width: 80%;
+  height: 80%;
+  background-color: #fff;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+.chatbot-closebtn-div{
+    padding: 5px;
+    display: flex;
+    justify-content: flex-end;
+}
+#chatbotlogo{
+  z-index: 3000;
+    object-fit: fill;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 30px;
+    bottom: 100px;
+}
+#chatbotlogo:hover{
+    transition: all 1s;
+    transform: scale(1.1);
+}
+.chatbox-main {
+    z-index: 3000;
+    display: none;
+    background: #00a09f;
+    width: 340px;
+    padding: 10px;
+    border-radius: 10px;
+    position: fixed;
+    right: 40px;
+    bottom: 50px;
+}
+
+.chatbox {
+    background-image: url(./chatbotbg.jpg);
+    background-size: cover;
+    border-radius: 5px;
+    padding: 5px;
+    margin-bottom: 20px;
+    overflow-y: scroll;
+    max-height: 300px;
+    max-width: 350px;
+    height: 300px;
+}
+
+.message {
+    margin-bottom: 10px;
+    padding: 7px;
+    border-radius: 5px;
+}
+
+.user {
+    background-color: #d9edff;
+    text-align: right;
+    font-size: 14px;
+}
+
+.bot {
+    width: fit-content;
+    background-color: #B2DFDB;
+    text-align: left;
+    font-size: 16px;
+}
+
+#userInput {
+    width: 320px;
+    padding: 10px;
+    font-size: 16px;
+}
+#lenspreviewImage {
+  position: fixed;
+  left: 30px;
+  top: 180px;
+  z-index: 4000;
+}
+
+.active {
+  color: red;
+}
+</style>
+<div id="preloader">
+  <div class="spinner"></div>
+</div>
+<body>
+
+	<header class="header header-sticky default">
+      <div class="topbar d-none d-md-block">
+        <div class="container">
+          <div class="topbar-inner">
+            <div class="row">
+              <div class="col-12">
+                <div class="d-lg-flex align-items-center text-center">
+                  <div class="topbar-left mb-2 mb-lg-0">
+                    <div class="topbar-call d-inline-flex">
+                      <a href="mailto:info@example.com">Call Services +91 6235474440</a>
+                    </div>
+                    <div class="me-auto d-inline-flex">
+                      <a href="tel:1-800-555-1234"><i class="fa-solid fa-location-dot me-2"></i>Calicut, Kerala India673573</a>
+                    </div>
+                  </div>
+                  <div class="topbar-right ms-auto justify-content-center">
+                    <div class="social d-inline-flex">
+                      <ul class="list-unstyled">
+                        <li><a href="www.facebook.com"> <i class="fa-brands fa-facebook-f"></i> </a></li>
+                        <li><a href="www.google.com"> <i class="fab fa-twitter"></i> </a></li>
+                        <li><a href="#"> <i class="fa-brands fa-linkedin"></i> </a></li>
+                        <li><a href="#"> <i class="fab fa-instagram"></i> </a></li>
+                      </ul>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav class="navbar navbar-static-top navbar-expand-lg">
+        <div class="container main-header position-relative">
+          <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"><i class="fas fa-align-left"></i></button>
+          <a class="navbar-brand" href="{{ url_for('home')}}">
+            <img class="img-fluid" src="{{ url_for('static', filename='images/mainlogo.png') }}" alt="logo" width="50" height="50">
+          </a>
+          <div class="navbar-collapse collapse justify-content-end justify-content-lg-center">
+            <ul class="nav navbar-nav">
+              <li class="nav-item dropdown {% if '/'  in request.url_rule.endpoint %} active {% endif %}">
+                <a class="nav-link" href="{{ url_for('home') }}" role="button" >Home</i></a>
+              </li>
+
+              <li class="nav-item dropdown {% if 'tour_planner'  in request.url_rule.endpoint %}active{% endif %}">
+               <a class="nav-link" href="{{ url_for('tour_planner') }}">AI Planner</a>
+
+              </li>
+
+              <li class="nav-item dropdown {% if 'tour_packages'  in request.url_rule.endpoint %}active{% endif %}">
+                <a class="nav-link" href="{{ url_for('tour_packages') }}" role="button">Tour Packages</i></a>
+              </li>
+
+              <li class="nav-item dropdown {% if 'blog_home'  in request.url_rule.endpoint %}active{% endif %}">
+                <a class="nav-link" href="{{ url_for('blog_home') }}" role="button" >Blog</i></a>
+              </li>
+
+              <!-- NOTIFICATION BELL ICON -->
+<!--               <li class="nav-item dropdown">
+                <div class="add-listing nav-link">
+                  <div class="woo-action">
+                    <ul class="list-unstyled">
+                       {% if 'username' in session %}
+                      <li class="cart dropdown">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">                       
+                          <span class="cart-icon"><i class="fa-regular fa-bell" style="color: #050505;"></i></object></span>
+                          {% if booking_notifications %}
+                          <span class="cart-count">{{ booking_notifications|length }}</span></button>
+                          {% endif %}
+                          <div class="dropdown-menu-right" aria-labelledby="dropdownMenuButton">                          
+                            <ul class="cart-list ps-0">                          
+                            <li class="d-flex">
+                                <a class="remove-item" href="#"><i class="fas fa-times"></i></a>
+                                <h6 class="noti-date"></h6>
+                                <div class="cart-info">
+                                {% if booking_notifications %}                            
+                                    {% for notification in booking_notifications %}
+                                  <a href="{{ url_for('user_booking_details_not', booking_id=notification[0]) }}">    
+                                          {% if notification[5] == 0 %}
+                                          Your Booking request is rejected !
+                                          {% elif notification[5] == 1 %}
+                                          Your Booking request is accepted !
+                                          {% endif %}
+                                    {% endfor %}
+                                    </a>
+                                   {% else %}
+                                   <p style="color: black;">No notifications for you</p> 
+                                  {% endif %}
+                                </div>
+                              </li>         
+                            </ul>
+                            <div class="cart-footer">
+                              <div class="d-inline-block d-sm-flex">
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                        {% endif %} 
+                      </ul>
+                    </div>
+                  </div>                
+                </li> -->
+            
+
+                <li class="nav-item dropdown">
+                 <!-- user  -->
+                 <div class="add-listing nav-link">
+                  <div class="woo-action">
+                    <ul class="list-unstyled">
+                      <li class="cart dropdown">
+                        <button class="dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <span class="cart-icon"><i class="fa-regular fa-user" style="color: #050505;"></i></object></span>
+                          <div class="dropdown-menu-right" aria-labelledby="dropdownMenuButton" style="width: 201px;">
+                            <!-- list -->
+                            <ul class="cart-list ps-0">
+                              <!-- 1 -->
+                              {% if 'username' in session %}
+	                               <li class="d-flex">
+	                                <div class="cart-info">
+	                                  <a href="{{ url_for('userprofile') }}" style="text-transform: capitalize; color: #029094;"> {{ session['username'] }}</a>
+	                                </div>
+	                              </li>
+	                              <li class="d-flex">
+		                            <div class="cart-info">
+		                              <a href="{{ url_for('user_bookings') }}"> Bookings </a>
+		                            </div>
+		                          </li>                      
+		                          <!--2  -->
+		                          <li class="d-flex">
+		                            <div class="cart-info">
+		                              <a href="{{ url_for('saved_packages') }}" class="{% if 'aboutus'  in request.url_rule.endpoint %}active{% endif %}"> Saved Packages</a>
+		                            </div>
+		                          </li>
+		                          <!--  -->
+		                          <li class="d-flex">
+		                            <div class="cart-info">
+		                              <a href="{{ url_for('user_settings') }}"> Setting</a>
+		                            </div>
+		                          </li>
+                              {% else %}
+		                           <li class="d-flex">
+		                            <div class="cart-info">
+		                              <a href="{{ url_for('login') }}"> Login </a>
+		                            </div>
+		                          </li>                      
+		                          <!--2  -->
+		                          <li class="d-flex">
+		                            <div class="cart-info">
+		                              <a href="{{ url_for('user_signup_verification') }}"> Sign Up</a>
+		                            </div>
+		                          </li>
+		                          <!--  -->
+                              {% endif %}
+
+                              <!--  -->
+
+                            </ul>
+                            <!--end  list  -->
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- end user -->
+                </li>
+               <!-- <a href="sign-up.html" class="btn btn-primary menu-btn ms-4 d-none d-xl-block">Sign In</a> -->
+            </div>
+
+            <!-- box user+notification -->
+
+              <!--end box  -->
+            </ul>
+          </div>
+        </nav>
+    </header>
+      
+    <!--=================================
+    Header -->
+
+
+	{% block content %}
+
+	{% endblock %}
+	      <!--=================================
+footer-->
+<footer class="footer">
+  <div class="min-footer bg-light">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-md-12">
+          <a class="footer-logo" href="index.html">
+            <img class="img-fluid" src="{{ url_for('static', filename='images/mainlogo.png') }}" alt="logo" width="50" height="50">
+            <h6>TripOrganizer.com</h6>
+          </a>
+          <p class="mt-4 mb-0">Give yourself the power of responsibility. Remind yourself the only thing stopping you is yourself.</p>
+          <div class="social-icon mt-4 mt-lg-5">
+            <ul>
+              <li><a href="#"><i class="fa-brands fa-facebook-f"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
+              <li><a href="#"><i class="fa-brands fa-linkedin-in"></i></a></li>
+              <li><a href="www.instagram.com"><i class="fab fa-instagram"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mt-md-5 mt-lg-0">
+          <div class="footer-link">
+            <h6 class="footer-title fw-600">Contact Travel</h6>
+            <div class="footer-contact-info">
+              <ul class="list-unstyled mb-0">
+                <li><img class="img-fluid" src="{{ url_for('static', filename='images/address.png') }}" alt="#"><span class="address">17504 Carlton Cuevas Rd, Gulfport, MS, 39503</span></li>
+                <li><img class="img-fluid" src="{{ url_for('static', filename='images/phone.png') }}" alt="#"><span class="phone">+(91) 6235474440</span></li>
+                <li><img class="img-fluid" src="{{ url_for('static', filename='images/email.png') }}" alt="#"><span class="email">TripOrganizer@yahoo.com</span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 col-md-6 mt-4 mt-md-5 mt-lg-0 position-relative">
+          <img class="img-fluid footer-map" src="{{ url_for('static', filename='images/footer-map.png') }}" alt="logo">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="container">
+      <div class="row align-items-center copyright">
+        <div class="col-12 col-md-6 text-center text-md-start">
+          <div class="copyright-menu footer-menu">
+            <ul class="mb-0 justify-content-center justify-content-md-start">
+              <li><a class="text-black" href="#">Term & Conditions</a></li>
+              <li><a class="text-black" href="#">Privacy Policy </a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 text-center text-md-end mt-2 mt-md-0">
+          <p class="mb-0"> &copy; Copyright <span id="copyright"> <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script></span> <a href="{{ url_for('home') }}"> TripOrganizer </a> All Rights Reserved</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<!--=================================
+footer-->
+
+<!-- LENS FORM -->
+<img id="lenspreviewImage" src="{{ url_for('static', filename='/images/chatbot/g-lens.png')}}" style="cursor: pointer;" width="50" height="50">
+
+<form id="image_upload_form" action="{{ url_for('search_image') }}" method="POST" enctype="multipart/form-data" style="display: none;">
+    <input type="file" name="image" id="imageInput" style="display: none;" accept="image">
+    <input type="submit" value="Search">
+</form>
+<!-- END OF LENS FORM -->
+
+<!-- CHATBOT  -->
+<style type="text/css">
+  #chatpreloader {
+    display: none;
+  }
+  #chatpreloader img {
+        width: 110px;
+    height: 25px;
+    /* margin: 0; */
+    object-fit: cover;
+    border-radius: 25px
+  }
+  .message_preloader {
+    display: block;
+    position: absolute;
+    left: 10px;
+    bottom: 70px;
+  }
+</style>
+<!-- ================================ -->
+<img src="{{ url_for('static', filename='/images/chatbot/bot.png')}}" id="chatbotlogo">
+<div class="chatbox-main">
+    <div class="chatbot-closebtn-div">
+        <img src="{{ url_for('static', filename='/images/chatbot/close-btn.webp')}}" id="chatbotclose" width="20" height="20">
+    </div>
+    <div class="chatbox" id="chatbox">
+        <div class="message bot">How can i help you😊</div>
+        <div class="message_preloader bo" id="chatpreloader"><img src="{{url_for('static', filename='images/preloader/chat_loader.gif')}}"></div>
+    </div>
+      <input type="text" id="userInput" name="message" placeholder="Type your message...">
+</div>
+<!-- =================================== -->
+<!-- /chatbot -->
+
+<!--=================================
+Back To Top-->
+<div id="back-to-top" class="back-to-top">
+  <a href="#"><i class="fas fa-angle-up"></i></a>
+</div>
+<!--=================================
+Back To Top-->
+</body>
+</html>
+ <!-- JS Global Compulsory (Do not remove)--> 
+
+<!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
+<script src="{{ url_for('static', filename='js/select2/select2.full.js') }}"></script>
+<script src="{{ url_for('static', filename='js/datetimepicker/moment.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/datetimepicker/datetimepicker.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/owl-carousel/owl.carousel.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/horizontal-timeline/horizontal-timeline.js') }}"></script>
+<!-- Javascript -->
+<!-- JS Global Compulsory (Do not remove)-->
+<script src="{{ url_for('static', filename='js/jquery-3.6.0.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.appear.js') }}"></script>
+<script src="{{ url_for('static', filename='js/popper/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
+<!-- Page JS Implementing Plugins (Remove the plugin script here if site does not use that feature)-->
+
+<!-- Template Scripts (Do not remove)-->
+<script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+<!-- Preloader scripts go here -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Hide the preloader when the content is loaded
+        var preloader = document.getElementById("preloader");
+        preloader.style.display = "none";
+    });
+</script>
+
+<!-- Chat bot JS-->
+<script>
+    $(document).ready(function() {
+        $("#userInput").keypress(function(e) {
+            if (e.which === 13) {
+                var userInput = $("#userInput").val();
+                if (userInput !== "") {
+                    appendMessage(userInput, "user");
+                    sendUserInput(userInput);
+                    $("#userInput").val("");
+                    $("#chatpreloader").show();
+                }
+            }
+        });
+    });
+
+    function appendMessage(message, type) {
+        var messageHtml = '<div class="message ' + type + '">' + message + "</div>";
+        $("#chatbox").append(messageHtml);
+        $(".chatbox").scrollTop($(".chatbox")[0].scrollHeight);
+    }
+    function sendUserInput(userInput) {
+        // Show the preloader
+        $.ajax({
+            url: "/chat",
+            type: "post",
+            data: { message: userInput },
+            success: function(data) {
+              $("#chatpreloader").hide();
+              if (data.status && data.result) {
+                  appendMessage(data.result, "bot");
+              } else {
+                  // Handle error or unexpected response
+                  appendMessage("Error: Unexpected response from the server", "bot");
+                  console.log("Unexpected response:", data);
+              }
+            },
+            error: function(error) {
+                appendMessage("Error: " + error.responseJSON.message, "bot");
+                console.log("Error:", error);
+            },
+        });
+    }
+
+
+
+    // chat bot showing and hding when logo clicked
+
+    $("#chatbotlogo").click(function() {
+        $("#chatbotlogo").hide();
+        $(".chatbox-main").show();
+    })
+    $("#chatbotclose").click(function() {
+        $("#chatbotlogo").show();
+        $(".chatbox-main").hide();
+    })
+     $(".chatbox-main").blur(function() {
+        $("#chatbotlogo").show();
+        $(".chatbox-main").hide();
+    })
+</script>
+
+<!-- END OF CHATBOT -->
+
+<!-- IMAGE LENS -->
+<script>
+$(document).ready(function() {
+    // Show file input when image is clicked
+    $('#lenspreviewImage').click(function() {
+        $('#imageInput').click();
+    });
+
+    // Change image source and submit form when a file is selected
+    $('#imageInput').change(function() {
+        readURL(this);
+    });
+
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#lenspreviewImage').attr('src', e.target.result);
+                $('#image_upload_form').submit(); // Assuming you have a form with id "image_upload_form"
+                $('#lens-preloader').show();
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+});
+
+</script>
+
+
+
